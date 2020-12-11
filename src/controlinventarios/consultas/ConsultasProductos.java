@@ -28,7 +28,7 @@ public class ConsultasProductos {
         miConexion.close();
     }
     
-    public void llenarCMBProveedores(JComboBox cmb) throws SQLException{
+    public void llenarCMBProductos(JComboBox cmb) throws SQLException{
         Connection miConexion = new ConexionBD().realizarConexion();
         String consulta = "SELECT nombre FROM productos";
         Statement sentencia = miConexion.createStatement();

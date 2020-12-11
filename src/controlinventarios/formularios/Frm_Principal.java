@@ -2,6 +2,9 @@
 package controlinventarios.formularios;
 
 import controlinventarios.consultas.ConsultasProductos;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -351,8 +354,11 @@ public class Frm_Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2MouseClicked
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
-        // TODO add your handling code here:
-        new Frm_Compras().setVisible(true);
+        try {
+            // TODO add your handling code here:
+            new Frm_Compras().setVisible(true);
+        } catch (SQLException ex) {
+        }
         this.setVisible(false);
     }//GEN-LAST:event_jPanel3MouseClicked
 
