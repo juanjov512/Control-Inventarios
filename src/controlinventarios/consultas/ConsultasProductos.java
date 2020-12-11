@@ -14,13 +14,27 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ConsultasProductos {
 
-    public void llenarTabla(JTable miTabla) throws SQLException{
+    public void llenarTablaProductos(JTable miTabla) throws SQLException{
         DefaultTableModel modelo = new DefaultTableModel();
         Connection miConexion = new ConexionBD().realizarConexion();
         String consulta = "SELECT id,nombre FROM productos";
         Statement sentencia = miConexion.createStatement();
         ResultSet resultado = sentencia.executeQuery(consulta);
         modelo.setColumnIdentifiers(new Object[]{"ID","PRODUCTO"});
+        while(resultado.next()){
+            modelo.addRow(new Object[]{resultado.getString("id"), resultado.getString("nombre")});
+        }
+        miTabla.setModel(modelo);
+        miConexion.close();
+    }
+    
+    public void llenarTablaUsuarios(JTable miTabla, String nombre, String tipo) throws SQLException{
+        DefaultTableModel modelo = new DefaultTableModel();
+        Connection miConexion = new ConexionBD().realizarConexion();
+        String consulta = "SELECT id,nombre FROM usuarios WHERE tipo = '"+tipo+"'";
+        Statement sentencia = miConexion.createStatement();
+        ResultSet resultado = sentencia.executeQuery(consulta);
+        modelo.setColumnIdentifiers(new Object[]{"ID",nombre.toUpperCase()});
         while(resultado.next()){
             modelo.addRow(new Object[]{resultado.getString("id"), resultado.getString("nombre")});
         }

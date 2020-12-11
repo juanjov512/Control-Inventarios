@@ -752,7 +752,11 @@ public class Frm_Compras extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarRegistrosMouseClicked
 
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
-        // TODO add your handling code here:
+        try {
+            new Frm_Productos().setVisible(true);
+        } catch (SQLException ex) {
+        }
+        this.setVisible(false);
     }//GEN-LAST:event_btnProductosMouseClicked
 
     private void btnVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseClicked
