@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -28,13 +29,17 @@ public class Frm_Eliminar extends javax.swing.JFrame {
 
     Color colorBordeAzul = new Color(0, 204, 255);
     int ID_PRODUCTO;
-
+    ConsultasCompras conCom = new ConsultasCompras();
+    ConsultasProveedores conProveedores = new ConsultasProveedores();
+    ConsultasProductos conProductos = new ConsultasProductos();
+    
     /**
      * Creates new form Frm_Principal
      */
     public Frm_Eliminar() throws SQLException {
         initComponents();
-        
+        llenarTabla();
+        activarPanel(false);
     }
 
     /**
@@ -67,12 +72,21 @@ public class Frm_Eliminar extends javax.swing.JFrame {
         lblEditar = new javax.swing.JLabel();
         lblEditarProductos = new javax.swing.JLabel();
         lblNombreEditar = new javax.swing.JLabel();
-        txtEditar = new javax.swing.JTextField();
+        txtKilos = new javax.swing.JTextField();
         jSeparator8 = new javax.swing.JSeparator();
         btnEditarGuardar = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         btnEditarCancelar = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
+        cmbProveedores = new javax.swing.JComboBox<>();
+        cmbProductos = new javax.swing.JComboBox<>();
+        txtFecha = new com.toedter.calendar.JDateChooser();
+        lblNombreEditar1 = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JTextField();
+        jSeparator9 = new javax.swing.JSeparator();
+        lblNombreEditar2 = new javax.swing.JLabel();
+        lblNombreEditar3 = new javax.swing.JLabel();
+        lblNombreEditar4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnEliminarRegistros = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -113,7 +127,7 @@ public class Frm_Eliminar extends javax.swing.JFrame {
 
         lblPrincipal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblPrincipal.setForeground(new java.awt.Color(153, 153, 153));
-        lblPrincipal.setText("Listado de Productos");
+        lblPrincipal.setText("Listado de Compras");
 
         tbContenido.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbContenido.setModel(new javax.swing.table.DefaultTableModel(
@@ -121,11 +135,11 @@ public class Frm_Eliminar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -161,7 +175,7 @@ public class Frm_Eliminar extends javax.swing.JFrame {
 
         lblVisualizar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblVisualizar.setForeground(new java.awt.Color(153, 153, 153));
-        lblVisualizar.setText("Visualizar Productos");
+        lblVisualizar.setText("Visualizar Compras");
 
         btnEditar.setBackground(new java.awt.Color(0, 153, 204));
         btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -206,12 +220,12 @@ public class Frm_Eliminar extends javax.swing.JFrame {
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 681, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(284, 284, 284)
+                .addGap(346, 346, 346)
                 .addComponent(lblVisualizar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(351, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +257,7 @@ public class Frm_Eliminar extends javax.swing.JFrame {
             }
         });
 
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Productos", "Proveedores", "Clientes" }));
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Compras", "Ventas", " " }));
         cmbTipo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbTipoItemStateChanged(evt);
@@ -256,20 +270,20 @@ public class Frm_Eliminar extends javax.swing.JFrame {
 
         lblEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblEditar.setForeground(new java.awt.Color(153, 153, 153));
-        lblEditar.setText("Editar Productos");
+        lblEditar.setText("Editar Compras");
 
         lblEditarProductos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblEditarProductos.setForeground(new java.awt.Color(153, 153, 153));
-        lblEditarProductos.setText("Editar Productos");
+        lblEditarProductos.setText("Editar Compras");
 
         lblNombreEditar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblNombreEditar.setText("NOMBRE:");
+        lblNombreEditar.setText("Kilos*");
         lblNombreEditar.setToolTipText("");
 
-        txtEditar.setBackground(new java.awt.Color(255, 255, 255));
-        txtEditar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        txtEditar.setToolTipText("");
-        txtEditar.setBorder(null);
+        txtKilos.setBackground(new java.awt.Color(255, 255, 255));
+        txtKilos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtKilos.setToolTipText("");
+        txtKilos.setBorder(null);
 
         btnEditarGuardar.setBackground(new java.awt.Color(0, 153, 204));
         btnEditarGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -289,8 +303,8 @@ public class Frm_Eliminar extends javax.swing.JFrame {
         btnEditarGuardarLayout.setHorizontalGroup(
             btnEditarGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEditarGuardarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel27, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE)
+                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         btnEditarGuardarLayout.setVerticalGroup(
             btnEditarGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,6 +335,31 @@ public class Frm_Eliminar extends javax.swing.JFrame {
             .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
         );
 
+        cmbProveedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        cmbProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lblNombreEditar1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNombreEditar1.setText("Precio*");
+        lblNombreEditar1.setToolTipText("");
+
+        txtPrecio.setBackground(new java.awt.Color(255, 255, 255));
+        txtPrecio.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        txtPrecio.setToolTipText("");
+        txtPrecio.setBorder(null);
+
+        lblNombreEditar2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNombreEditar2.setText("Fecha*");
+        lblNombreEditar2.setToolTipText("");
+
+        lblNombreEditar3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNombreEditar3.setText("Producto*");
+        lblNombreEditar3.setToolTipText("");
+
+        lblNombreEditar4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblNombreEditar4.setText("Proveedor*");
+        lblNombreEditar4.setToolTipText("");
+
         javax.swing.GroupLayout panelEditarLayout = new javax.swing.GroupLayout(panelEditar);
         panelEditar.setLayout(panelEditarLayout);
         panelEditarLayout.setHorizontalGroup(
@@ -328,27 +367,44 @@ public class Frm_Eliminar extends javax.swing.JFrame {
             .addComponent(jSeparator7)
             .addComponent(jSeparator6)
             .addGroup(panelEditarLayout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addComponent(lblEditarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEditarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEditarLayout.createSequentialGroup()
-                        .addComponent(lblNombreEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSeparator8)
-                            .addComponent(txtEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE))
-                        .addGap(121, 121, 121))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEditarLayout.createSequentialGroup()
-                        .addComponent(lblEditar)
-                        .addGap(243, 243, 243))
+                    .addGroup(panelEditarLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(lblEditarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelEditarLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(panelEditarLayout.createSequentialGroup()
+                                .addComponent(lblNombreEditar1)
+                                .addGap(18, 18, 18)
+                                .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSeparator9)
+                                    .addComponent(txtPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)))
+                            .addGroup(panelEditarLayout.createSequentialGroup()
+                                .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblNombreEditar)
+                                    .addComponent(lblNombreEditar2)
+                                    .addComponent(lblNombreEditar3)
+                                    .addComponent(lblNombreEditar4))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtKilos, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEditarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEditarLayout.createSequentialGroup()
                         .addComponent(btnEditarCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnEditarGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEditarLayout.createSequentialGroup()
+                        .addComponent(lblEditar)
+                        .addGap(151, 151, 151))))
         );
         panelEditarLayout.setVerticalGroup(
             panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,20 +413,41 @@ public class Frm_Eliminar extends javax.swing.JFrame {
                 .addComponent(lblEditarProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGap(26, 26, 26)
                 .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNombreEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombreEditar4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60)
+                .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombreEditar3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60)
                 .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnEditarGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditarCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(lblEditar)
+                    .addGroup(panelEditarLayout.createSequentialGroup()
+                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNombreEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtKilos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNombreEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0)
+                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEditarGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEditarCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(lblEditar))
+                    .addGroup(panelEditarLayout.createSequentialGroup()
+                        .addComponent(lblNombreEditar2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -379,19 +456,19 @@ public class Frm_Eliminar extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(btnBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(803, 803, 803)
-                        .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,10 +497,10 @@ public class Frm_Eliminar extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Eliminar registros");
+        jLabel1.setText("Editar registros");
 
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controlinventarios/logos/round_delete_forever_white_18dp.png"))); // NOI18N
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controlinventarios/logos/baseline_edit_white_18dp.png"))); // NOI18N
 
         jPanel13.setBackground(new java.awt.Color(32, 132, 252));
 
@@ -823,15 +900,44 @@ public class Frm_Eliminar extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Frm_Productos().setVisible(true);
+                    new Frm_Eliminar().setVisible(true);
                 } catch (SQLException ex) {
                 }
             }
         });
 
     }
-
-
+    
+    private void llenarTabla() throws SQLException{
+        conCom.llenarTabla(tbContenido);
+    }
+    
+    private void llenarCmbs() throws SQLException{
+        conProveedores.llenarCMBProveedores(cmbProveedores);
+        conProductos.llenarCMBProductos(cmbProductos);
+    }
+    
+    private void activarPanel(boolean b) throws SQLException{
+        cmbProductos.setEnabled(b);
+        cmbProveedores.setEnabled(b);
+        txtFecha.setEnabled(b);
+        txtPrecio.setEnabled(b);
+        txtKilos.setEnabled(b);
+        btnEditarCancelar.setVisible(b);
+        btnEditarGuardar.setVisible(b);
+        if(b){
+            llenarCmbs();
+        }
+    }
+    
+    private void llenarPanel(){
+        DefaultTableModel tm = (DefaultTableModel) tbContenido.getModel();
+        int row = tbContenido.getSelectedRow();
+        if (tbContenido.getSelectedRow() != -1) {
+            ID_PRODUCTO = Integer.parseInt(String.valueOf(tm.getValueAt(row, 0)));
+            //txtEditar.setText(String.valueOf(tm.getValueAt(row, 1)));
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnActualizarRegistros;
@@ -845,6 +951,8 @@ public class Frm_Eliminar extends javax.swing.JFrame {
     private javax.swing.JPanel btnInformes;
     private javax.swing.JPanel btnProductos;
     private javax.swing.JPanel btnVentas;
+    private javax.swing.JComboBox<String> cmbProductos;
+    private javax.swing.JComboBox<String> cmbProveedores;
     private javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -876,14 +984,21 @@ public class Frm_Eliminar extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel lblEditar;
     private javax.swing.JLabel lblEditarProductos;
     private javax.swing.JLabel lblNombreEditar;
+    private javax.swing.JLabel lblNombreEditar1;
+    private javax.swing.JLabel lblNombreEditar2;
+    private javax.swing.JLabel lblNombreEditar3;
+    private javax.swing.JLabel lblNombreEditar4;
     private javax.swing.JLabel lblPrincipal;
     private javax.swing.JLabel lblVisualizar;
     private javax.swing.JPanel panelEditar;
     private javax.swing.JTable tbContenido;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtEditar;
+    private com.toedter.calendar.JDateChooser txtFecha;
+    private javax.swing.JTextField txtKilos;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

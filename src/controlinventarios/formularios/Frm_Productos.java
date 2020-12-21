@@ -932,7 +932,11 @@ public class Frm_Productos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnComprasMouseClicked
 
     private void btnEliminarRegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarRegistrosMouseClicked
-        // TODO add your handling code here:
+        try {
+            new Frm_Eliminar().setVisible(true);
+        } catch (SQLException ex) {
+        }
+        this.setVisible(false);
     }//GEN-LAST:event_btnEliminarRegistrosMouseClicked
 
     private void cmbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoItemStateChanged

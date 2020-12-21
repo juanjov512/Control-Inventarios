@@ -25,18 +25,18 @@ public class ConsultasCompras {
     public void llenarTabla(JTable miTabla) throws SQLException{
         DefaultTableModel modelo = new DefaultTableModel();
         Connection miConexion = new ConexionBD().realizarConexion();
-        String consulta = "SELECT C.id, U.nombre as usuario, P.nombre, precio, "
-                + "kilos FROM compras C INNER JOIN productos P "
+        String consulta = "SELECT C.id as id, U.nombre as usuario, P.nombre, "
+                + "precio, kilos, fecha FROM compras C INNER JOIN productos P "
                 + "ON C.id_productos = P.id INNER JOIN usuarios U "
-                + "ON C.id_usuario = U.id";
+                + "ON C.id_usuario = U.id ORDER BY fecha DESC";
         Statement sentencia = miConexion.createStatement();
         ResultSet res = sentencia.executeQuery(consulta);
-        modelo.setColumnIdentifiers(new Object[]{"CODIGO","PROVEEDOR","PRODUCTO",
-        "PRECIO","KILOS"});
+        modelo.setColumnIdentifiers(new Object[]{"ID","PROVEEDOR","PRODUCTO",
+        "PRECIO","KILOS","FECHA"});
         while(res.next()){
-            modelo.addRow(new Object[]{res.getString("id"),
-                res.getString("usuario"), res.getString("nombre"), 
-                res.getString("precio"), res.getString("kilos")});
+            modelo.addRow(new Object[]{res.getString("id"),res.getString("usuario"),
+                res.getString("nombre"), res.getString("precio"), 
+                res.getString("kilos"), res.getString("fecha")});
         }
         miTabla.setModel(modelo);
         miConexion.close();
