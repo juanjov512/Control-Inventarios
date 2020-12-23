@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 public class ConsultasProveedores {
 
     public void llenarCMBProveedores(JComboBox cmb) throws SQLException {
+        cmb.removeAllItems();
         Connection conexion = new ConexionBD().realizarConexion();
         String consulta = "SELECT nombre FROM usuarios WHERE tipo = 'proveedor'";
         Statement sentencia = conexion.createStatement();

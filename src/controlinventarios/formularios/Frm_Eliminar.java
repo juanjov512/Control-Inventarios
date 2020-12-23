@@ -9,6 +9,8 @@ import controlinventarios.operacionesJTable.OperacionesJTable;
 import java.awt.Color;
 import java.awt.TextField;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -32,11 +34,11 @@ public class Frm_Eliminar extends javax.swing.JFrame {
     ConsultasCompras conCom = new ConsultasCompras();
     ConsultasProveedores conProveedores = new ConsultasProveedores();
     ConsultasProductos conProductos = new ConsultasProductos();
-    
+
     /**
      * Creates new form Frm_Principal
      */
-    public Frm_Eliminar() throws SQLException {
+    public Frm_Eliminar() throws SQLException, ParseException {
         initComponents();
         llenarTabla();
         activarPanel(false);
@@ -87,6 +89,7 @@ public class Frm_Eliminar extends javax.swing.JFrame {
         lblNombreEditar2 = new javax.swing.JLabel();
         lblNombreEditar3 = new javax.swing.JLabel();
         lblNombreEditar4 = new javax.swing.JLabel();
+        btnRefrescar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         btnEliminarRegistros = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -251,6 +254,11 @@ public class Frm_Eliminar extends javax.swing.JFrame {
         btnBusqueda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controlinventarios/logos/baseline_search_black_18dp.png"))); // NOI18N
         btnBusqueda.setBorder(null);
         btnBusqueda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBusqueda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBusquedaMouseClicked(evt);
+            }
+        });
         btnBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBusquedaActionPerformed(evt);
@@ -302,9 +310,7 @@ public class Frm_Eliminar extends javax.swing.JFrame {
         btnEditarGuardar.setLayout(btnEditarGuardarLayout);
         btnEditarGuardarLayout.setHorizontalGroup(
             btnEditarGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEditarGuardarLayout.createSequentialGroup()
-                .addGap(0, 16, Short.MAX_VALUE)
-                .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
         );
         btnEditarGuardarLayout.setVerticalGroup(
             btnEditarGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,10 +340,6 @@ public class Frm_Eliminar extends javax.swing.JFrame {
             btnEditarCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
         );
-
-        cmbProveedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        cmbProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lblNombreEditar1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblNombreEditar1.setText("Precio*");
@@ -451,6 +453,21 @@ public class Frm_Eliminar extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnRefrescar.setBackground(new java.awt.Color(244, 244, 244));
+        btnRefrescar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controlinventarios/logos/baseline_loop_black_18dp.png"))); // NOI18N
+        btnRefrescar.setBorder(null);
+        btnRefrescar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRefrescar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRefrescarMouseClicked(evt);
+            }
+        });
+        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -462,7 +479,9 @@ public class Frm_Eliminar extends javax.swing.JFrame {
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(btnBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(803, 803, 803)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(746, 746, 746)
                         .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -474,10 +493,11 @@ public class Frm_Eliminar extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -842,28 +862,79 @@ public class Frm_Eliminar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarRegistrosMouseClicked
 
     private void btnEditarCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarCancelarMouseClicked
-        
+        try {
+            activarPanel(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(Frm_Eliminar.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(Frm_Eliminar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnEditarCancelarMouseClicked
 
     private void btnEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseClicked
-        
+        try {
+            activarPanel(true);
+        } catch (SQLException ex) {
+        } catch (ParseException ex) {
+        }
     }//GEN-LAST:event_btnEditarMouseClicked
 
     private void btnEditarGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarGuardarMouseClicked
-        
+        int confirmado = JOptionPane.showConfirmDialog(
+                null, "¿Seguro que quiere editar esta compra?");
+        if (JOptionPane.OK_OPTION == confirmado) {
+            try {
+                editarRegistro();
+                JOptionPane.showMessageDialog(null, "Operacion terminada!");
+            } catch (ParseException ex) {
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Tipo de entrada incorrecto"
+                        + " en kilos o precio","Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
     }//GEN-LAST:event_btnEditarGuardarMouseClicked
 
     private void btnBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusquedaActionPerformed
-        
+
     }//GEN-LAST:event_btnBusquedaActionPerformed
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        
+        int confirmado = JOptionPane.showConfirmDialog(
+                null, "¿Seguro que quiere eliminar este registro?");
+        if (JOptionPane.OK_OPTION == confirmado) {
+            try {
+                eliminarRegistro();
+                llenarTabla();
+                JOptionPane.showMessageDialog(null, "Operacion terminada!");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error en la base de datos");
+            }
+        }
     }//GEN-LAST:event_btnEliminarMouseClicked
 
     private void cmbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoItemStateChanged
 
     }//GEN-LAST:event_cmbTipoItemStateChanged
+
+    private void btnBusquedaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBusquedaMouseClicked
+        try {
+            conCom.busquedaTabla(tbContenido, txtBuscar.getText());
+        } catch (SQLException ex) {
+            System.out.print(ex);
+        }
+    }//GEN-LAST:event_btnBusquedaMouseClicked
+
+    private void btnRefrescarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescarMouseClicked
+        try {
+            llenarTabla();
+        } catch (SQLException ex) {
+        }
+    }//GEN-LAST:event_btnRefrescarMouseClicked
+
+    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefrescarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -902,22 +973,23 @@ public class Frm_Eliminar extends javax.swing.JFrame {
                 try {
                     new Frm_Eliminar().setVisible(true);
                 } catch (SQLException ex) {
+                } catch (ParseException ex) {
                 }
             }
         });
 
     }
-    
-    private void llenarTabla() throws SQLException{
+
+    private void llenarTabla() throws SQLException {
         conCom.llenarTabla(tbContenido);
     }
-    
-    private void llenarCmbs() throws SQLException{
+
+    private void llenarCmbs() throws SQLException {
         conProveedores.llenarCMBProveedores(cmbProveedores);
         conProductos.llenarCMBProductos(cmbProductos);
     }
-    
-    private void activarPanel(boolean b) throws SQLException{
+
+    private void activarPanel(boolean b) throws SQLException, ParseException {
         cmbProductos.setEnabled(b);
         cmbProveedores.setEnabled(b);
         txtFecha.setEnabled(b);
@@ -925,17 +997,57 @@ public class Frm_Eliminar extends javax.swing.JFrame {
         txtKilos.setEnabled(b);
         btnEditarCancelar.setVisible(b);
         btnEditarGuardar.setVisible(b);
-        if(b){
+        if (b) {
             llenarCmbs();
         }
+        llenarPanel();
     }
-    
-    private void llenarPanel(){
+
+    private void llenarPanel() throws ParseException {
         DefaultTableModel tm = (DefaultTableModel) tbContenido.getModel();
         int row = tbContenido.getSelectedRow();
         if (tbContenido.getSelectedRow() != -1) {
             ID_PRODUCTO = Integer.parseInt(String.valueOf(tm.getValueAt(row, 0)));
-            //txtEditar.setText(String.valueOf(tm.getValueAt(row, 1)));
+            item(cmbProveedores, String.valueOf(tm.getValueAt(row, 1)));
+            item(cmbProductos, String.valueOf(tm.getValueAt(row, 2)));
+            txtPrecio.setText(String.valueOf(tm.getValueAt(row, 3)));
+            txtKilos.setText(String.valueOf(tm.getValueAt(row, 4)));
+            Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(tm.getValueAt(row, 5)));
+            txtFecha.setDate(date1);
+        }
+    }
+
+    private void item(JComboBox combo, String item) {
+        for (int i = 0; i < combo.getItemCount(); i++) {
+            if (combo.getItemAt(i).equals(item)) {
+                combo.setSelectedIndex(i);
+                break;
+            }
+        }
+    }
+
+    private void editarRegistro() throws ParseException {
+        String fecha = txtFecha.getDate().toString();
+        String proveedor = cmbProveedores.getSelectedItem().toString();
+        String producto = cmbProductos.getSelectedItem().toString();
+        int precio = Integer.parseInt(txtPrecio.getText());
+        double kilos = Double.parseDouble(txtKilos.getText());
+        Compras c = new Compras(fecha, proveedor, producto, precio, kilos);
+        try {
+            conCom.editarRegistro(c, ID_PRODUCTO);
+            llenarTabla();
+            activarPanel(false);
+        } catch (SQLException ex) {
+            System.out.print(ex);
+        }
+    }
+    
+    private void eliminarRegistro() throws SQLException{
+        DefaultTableModel tm = (DefaultTableModel) tbContenido.getModel();
+        int row = tbContenido.getSelectedRow();
+        if (tbContenido.getSelectedRow() != -1) {
+            ID_PRODUCTO = Integer.parseInt(String.valueOf(tm.getValueAt(row, 0)));
+            conCom.eliminarRegistro(ID_PRODUCTO);
         }
     }
 
@@ -950,6 +1062,7 @@ public class Frm_Eliminar extends javax.swing.JFrame {
     private javax.swing.JPanel btnEliminarRegistros;
     private javax.swing.JPanel btnInformes;
     private javax.swing.JPanel btnProductos;
+    private javax.swing.JButton btnRefrescar;
     private javax.swing.JPanel btnVentas;
     private javax.swing.JComboBox<String> cmbProductos;
     private javax.swing.JComboBox<String> cmbProveedores;

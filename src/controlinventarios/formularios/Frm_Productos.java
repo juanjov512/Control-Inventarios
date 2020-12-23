@@ -9,6 +9,7 @@ import controlinventarios.operacionesJTable.OperacionesJTable;
 import java.awt.Color;
 import java.awt.TextField;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -91,6 +92,7 @@ public class Frm_Productos extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         btnEditarCancelar = new javax.swing.JPanel();
         jLabel28 = new javax.swing.JLabel();
+        btnRefrescar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         btnEliminarRegistros = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -541,6 +543,21 @@ public class Frm_Productos extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnRefrescar.setBackground(new java.awt.Color(244, 244, 244));
+        btnRefrescar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controlinventarios/logos/baseline_loop_black_18dp.png"))); // NOI18N
+        btnRefrescar.setBorder(null);
+        btnRefrescar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRefrescar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRefrescarMouseClicked(evt);
+            }
+        });
+        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -558,21 +575,24 @@ public class Frm_Productos extends javax.swing.JFrame {
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(btnBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
@@ -935,6 +955,7 @@ public class Frm_Productos extends javax.swing.JFrame {
         try {
             new Frm_Eliminar().setVisible(true);
         } catch (SQLException ex) {
+        } catch (ParseException ex) {
         }
         this.setVisible(false);
     }//GEN-LAST:event_btnEliminarRegistrosMouseClicked
@@ -1049,6 +1070,17 @@ public class Frm_Productos extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnEliminarMouseClicked
+
+    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRefrescarActionPerformed
+
+    private void btnRefrescarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRefrescarMouseClicked
+        try {
+            llenarTabla();
+        } catch (SQLException ex) {
+        }
+    }//GEN-LAST:event_btnRefrescarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1185,6 +1217,7 @@ public class Frm_Productos extends javax.swing.JFrame {
     private javax.swing.JPanel btnGuardarAgregar;
     private javax.swing.JPanel btnInformes;
     private javax.swing.JPanel btnProductos;
+    private javax.swing.JButton btnRefrescar;
     private javax.swing.JPanel btnVentas;
     private javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JLabel jLabel1;

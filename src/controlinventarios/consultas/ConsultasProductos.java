@@ -16,12 +16,16 @@ import javax.swing.table.DefaultTableModel;
 public class ConsultasProductos {
 
     public void llenarTablaProductos(JTable miTabla, String producto) throws SQLException {
-        DefaultTableModel modelo = new DefaultTableModel();
+        DefaultTableModel modelo = new DefaultTableModel(){
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         Connection miConexion = new ConexionBD().realizarConexion();
         String consulta = "";
         if (producto != "") {
-            consulta = "SELECT id,nombre FROM productos WHERE nombre = "
-                    + "'" + producto + "'";
+            consulta = "SELECT id,nombre FROM productos WHERE nombre LIKE "
+                    + "'%" + producto + "%'";
         } else {
             consulta = "SELECT id,nombre FROM productos";
         }
@@ -37,12 +41,16 @@ public class ConsultasProductos {
 
     public void llenarTablaUsuarios(JTable miTabla, String nombre, String tipo,
             String usuario) throws SQLException {
-        DefaultTableModel modelo = new DefaultTableModel();
+        DefaultTableModel modelo = new DefaultTableModel(){
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         Connection miConexion = new ConexionBD().realizarConexion();
         String consulta = "";
         if (usuario != "") {
             consulta = "SELECT id,nombre FROM usuarios WHERE tipo = '"
-                    + tipo + "' AND nombre = '" + usuario + "'";
+                    + tipo + "' AND nombre LIKE '%" + usuario + "%'";
         } else {
             consulta = "SELECT id,nombre FROM usuarios WHERE tipo = '" + tipo + "'";
         }
@@ -57,6 +65,7 @@ public class ConsultasProductos {
     }
 
     public void llenarCMBProductos(JComboBox cmb) throws SQLException {
+        cmb.removeAllItems();
         Connection miConexion = new ConexionBD().realizarConexion();
         String consulta = "SELECT nombre FROM productos";
         Statement sentencia = miConexion.createStatement();
