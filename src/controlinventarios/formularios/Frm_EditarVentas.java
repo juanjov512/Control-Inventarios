@@ -2,29 +2,19 @@ package controlinventarios.formularios;
 
 import controlinventarios.consultas.ConsultasClientes;
 import controlinventarios.consultas.ConsultasProductos;
-import controlinventarios.consultas.ConsultasCompras;
-import controlinventarios.consultas.ConsultasProveedores;
 import controlinventarios.consultas.ConsultasVentas;
-import controlinventarios.modals.ModalProveedor;
-import controlinventarios.objects.Compras;
 import controlinventarios.objects.Ventas;
-import controlinventarios.operacionesJTable.OperacionesJTable;
 import java.awt.Color;
-import java.awt.TextField;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 /**
  *
@@ -45,6 +35,7 @@ public class Frm_EditarVentas extends javax.swing.JFrame {
         initComponents();
         llenarTabla();
         activarPanel(false);
+        AutoCompleteDecorator.decorate(cmbProveedores);
     }
 
     /**

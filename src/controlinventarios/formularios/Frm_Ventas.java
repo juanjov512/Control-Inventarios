@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
-
 /**
  *
  * @author juanj
