@@ -94,7 +94,7 @@ public class Frm_Productos extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         btnRefrescar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        btnEliminarRegistros = new javax.swing.JPanel();
+        btnEditarCompras = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         btnCompras = new javax.swing.JPanel();
@@ -108,7 +108,7 @@ public class Frm_Productos extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
-        btnActualizarRegistros = new javax.swing.JPanel();
+        btnEditarVentas = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         btnInformes = new javax.swing.JPanel();
@@ -605,33 +605,33 @@ public class Frm_Productos extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(49, 58, 73));
 
-        btnEliminarRegistros.setBackground(new java.awt.Color(49, 58, 73));
-        btnEliminarRegistros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEliminarRegistros.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEditarCompras.setBackground(new java.awt.Color(49, 58, 73));
+        btnEditarCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditarCompras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEliminarRegistrosMouseClicked(evt);
+                btnEditarComprasMouseClicked(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Eliminar registros");
+        jLabel1.setText("Editar compras");
 
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controlinventarios/logos/round_delete_forever_white_18dp.png"))); // NOI18N
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controlinventarios/logos/baseline_edit_white_18dp.png"))); // NOI18N
 
-        javax.swing.GroupLayout btnEliminarRegistrosLayout = new javax.swing.GroupLayout(btnEliminarRegistros);
-        btnEliminarRegistros.setLayout(btnEliminarRegistrosLayout);
-        btnEliminarRegistrosLayout.setHorizontalGroup(
-            btnEliminarRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEliminarRegistrosLayout.createSequentialGroup()
+        javax.swing.GroupLayout btnEditarComprasLayout = new javax.swing.GroupLayout(btnEditarCompras);
+        btnEditarCompras.setLayout(btnEditarComprasLayout);
+        btnEditarComprasLayout.setHorizontalGroup(
+            btnEditarComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEditarComprasLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        btnEliminarRegistrosLayout.setVerticalGroup(
-            btnEliminarRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        btnEditarComprasLayout.setVerticalGroup(
+            btnEditarComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
             .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -762,33 +762,33 @@ public class Frm_Productos extends javax.swing.JFrame {
             .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        btnActualizarRegistros.setBackground(new java.awt.Color(49, 58, 73));
-        btnActualizarRegistros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnActualizarRegistros.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEditarVentas.setBackground(new java.awt.Color(49, 58, 73));
+        btnEditarVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditarVentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnActualizarRegistrosMouseClicked(evt);
+                btnEditarVentasMouseClicked(evt);
             }
         });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Actualizar registros");
+        jLabel7.setText("Editar ventas");
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controlinventarios/logos/round_loop_white_18dp.png"))); // NOI18N
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controlinventarios/logos/baseline_edit_white_18dp.png"))); // NOI18N
 
-        javax.swing.GroupLayout btnActualizarRegistrosLayout = new javax.swing.GroupLayout(btnActualizarRegistros);
-        btnActualizarRegistros.setLayout(btnActualizarRegistrosLayout);
-        btnActualizarRegistrosLayout.setHorizontalGroup(
-            btnActualizarRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnActualizarRegistrosLayout.createSequentialGroup()
+        javax.swing.GroupLayout btnEditarVentasLayout = new javax.swing.GroupLayout(btnEditarVentas);
+        btnEditarVentas.setLayout(btnEditarVentasLayout);
+        btnEditarVentasLayout.setHorizontalGroup(
+            btnEditarVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEditarVentasLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        btnActualizarRegistrosLayout.setVerticalGroup(
-            btnActualizarRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        btnEditarVentasLayout.setVerticalGroup(
+            btnEditarVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
             .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -843,8 +843,8 @@ public class Frm_Productos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(btnInformes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnActualizarRegistros, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminarRegistros, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditarVentas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditarCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnVentas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(btnProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -864,15 +864,15 @@ public class Frm_Productos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEliminarRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnActualizarRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditarVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnInformes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnEliminarRegistros.getAccessibleContext().setAccessibleName("");
+        btnEditarCompras.getAccessibleContext().setAccessibleName("");
 
         jPanel12.setBackground(new java.awt.Color(23, 100, 191));
 
@@ -924,12 +924,21 @@ public class Frm_Productos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInformesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInformesMouseClicked
-        // TODO add your handling code here:
+        try {
+            new Frm_Informes().setVisible(true);
+        } catch (SQLException ex) {
+        }
+        this.setVisible(false);
     }//GEN-LAST:event_btnInformesMouseClicked
 
-    private void btnActualizarRegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarRegistrosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnActualizarRegistrosMouseClicked
+    private void btnEditarVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarVentasMouseClicked
+        try {
+            new Frm_EditarVentas().setVisible(true);
+        } catch (SQLException ex) {
+        } catch (ParseException ex) {
+        }
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEditarVentasMouseClicked
 
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
         // TODO add your handling code here:
@@ -951,14 +960,14 @@ public class Frm_Productos extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnComprasMouseClicked
 
-    private void btnEliminarRegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarRegistrosMouseClicked
+    private void btnEditarComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarComprasMouseClicked
         try {
-            new Frm_Eliminar().setVisible(true);
+            new Frm_EditarCompras().setVisible(true);
         } catch (SQLException ex) {
         } catch (ParseException ex) {
         }
         this.setVisible(false);
-    }//GEN-LAST:event_btnEliminarRegistrosMouseClicked
+    }//GEN-LAST:event_btnEditarComprasMouseClicked
 
     private void cmbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoItemStateChanged
         String texto = cmbTipo.getSelectedItem().toString();
@@ -968,6 +977,10 @@ public class Frm_Productos extends javax.swing.JFrame {
         lblAgregar.setText("Agregar " + texto);
         lblEditarProductos.setText("Editar " + texto);
         lblEditar.setText("Editar " + texto);
+        panelDesactivado(panelAgregar, btnGuardarAgregar, btnCancelarAgregar,
+                    txtAgregar, lblNombreAgregar);
+        panelDesactivado(panelEditar, btnEditarGuardar, btnEditarCancelar,
+                    txtEditar, lblNombreEditar);
         try {
             llenarTabla();
         } catch (SQLException ex) {
@@ -1029,6 +1042,8 @@ public class Frm_Productos extends javax.swing.JFrame {
         if (JOptionPane.OK_OPTION == confirmado) {
             try {
                 editarRegistro();
+                panelDesactivado(panelEditar, btnEditarGuardar, btnEditarCancelar,
+                        txtEditar, lblNombreEditar);
                 JOptionPane.showMessageDialog(null, "Operación terminada");
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex);
@@ -1058,8 +1073,8 @@ public class Frm_Productos extends javax.swing.JFrame {
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
         int confirmado = JOptionPane.showConfirmDialog(
                 null, "¿Seguro que quiere eliminar el registro seleccionado?\n"
-                        + " (Eliminarlo puede alterar el valor de los registros"
-                        + " existentes)","ALERTA!",JOptionPane.WARNING_MESSAGE);
+                + " (Eliminarlo puede alterar el valor de los registros"
+                + " existentes)", "ALERTA!", JOptionPane.WARNING_MESSAGE);
         if (JOptionPane.OK_OPTION == confirmado) {
             try {
                 eliminarRegistro();
@@ -1180,9 +1195,11 @@ public class Frm_Productos extends javax.swing.JFrame {
         String nombre = txtEditar.getText();
 
         if (tipo.contains("Productos")) {
-            con.editarUsuario(ID_PRODUCTO, nombre, "productos");
+            con.editarUsuario(ID_PRODUCTO, nombre, "productos", "");
+        } else if (tipo.contains("Proveedores")) {
+            con.editarUsuario(ID_PRODUCTO, nombre, "usuarios", "proveedor");
         } else {
-            con.editarUsuario(ID_PRODUCTO, nombre, "usuarios");
+            con.editarUsuario(ID_PRODUCTO, nombre, "usuarios", "cliente");
         }
         llenarTabla();
     }
@@ -1204,16 +1221,16 @@ public class Frm_Productos extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnActualizarRegistros;
     private javax.swing.JPanel btnAgregar;
     private javax.swing.JButton btnBusqueda;
     private javax.swing.JPanel btnCancelarAgregar;
     private javax.swing.JPanel btnCompras;
     private javax.swing.JPanel btnEditar;
     private javax.swing.JPanel btnEditarCancelar;
+    private javax.swing.JPanel btnEditarCompras;
     private javax.swing.JPanel btnEditarGuardar;
+    private javax.swing.JPanel btnEditarVentas;
     private javax.swing.JPanel btnEliminar;
-    private javax.swing.JPanel btnEliminarRegistros;
     private javax.swing.JPanel btnGuardarAgregar;
     private javax.swing.JPanel btnInformes;
     private javax.swing.JPanel btnProductos;

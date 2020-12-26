@@ -16,8 +16,8 @@ import javax.swing.table.DefaultTableModel;
 public class ConsultasProductos {
 
     public void llenarTablaProductos(JTable miTabla, String producto) throws SQLException {
-        DefaultTableModel modelo = new DefaultTableModel(){
-            public boolean isCellEditable(int row, int column){
+        DefaultTableModel modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
@@ -33,7 +33,9 @@ public class ConsultasProductos {
         ResultSet resultado = sentencia.executeQuery(consulta);
         modelo.setColumnIdentifiers(new Object[]{"ID", "PRODUCTO"});
         while (resultado.next()) {
-            modelo.addRow(new Object[]{resultado.getString("id"), resultado.getString("nombre")});
+            if (!resultado.getString("nombre").equalsIgnoreCase("gastos")) {
+                modelo.addRow(new Object[]{resultado.getString("id"), resultado.getString("nombre")});
+            }
         }
         miTabla.setModel(modelo);
         miConexion.close();
@@ -41,8 +43,8 @@ public class ConsultasProductos {
 
     public void llenarTablaUsuarios(JTable miTabla, String nombre, String tipo,
             String usuario) throws SQLException {
-        DefaultTableModel modelo = new DefaultTableModel(){
-            public boolean isCellEditable(int row, int column){
+        DefaultTableModel modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
@@ -64,15 +66,19 @@ public class ConsultasProductos {
         miConexion.close();
     }
 
-    public void llenarCMBProductos(JComboBox cmb) throws SQLException {
+    public void llenarCMBProductos(JComboBox cmb, String panel) throws SQLException {
         cmb.removeAllItems();
         Connection miConexion = new ConexionBD().realizarConexion();
         String consulta = "SELECT nombre FROM productos";
         Statement sentencia = miConexion.createStatement();
         ResultSet res = sentencia.executeQuery(consulta);
-
         while (res.next()) {
-            cmb.addItem(res.getString("nombre"));
+            if (!res.getString("nombre").equalsIgnoreCase("gastos")) {
+                cmb.addItem(res.getString("nombre"));
+            }
+        }
+        if (panel == "compras") {
+            cmb.addItem("gastos");
         }
         miConexion.close();
     }
@@ -129,12 +135,15 @@ public class ConsultasProductos {
         return producto;
     }
 
-    public void editarUsuario(int id, String nombre, String tabla) throws SQLException {
-        if (tabla == "usuarios" && (existeUsuario("proveedor", nombre) != ""
-                || existeUsuario("cliente", nombre) != "")) {
+    public void editarUsuario(int id, String nombre, String tabla, String tipo) throws SQLException {
+        if(tabla == "usuarios" && tipo == "cliente" && existeUsuario(tipo, nombre) != ""){
             JOptionPane.showMessageDialog(null, "Ya existe un usuario con"
                     + " este nombre", "Error!", JOptionPane.ERROR_MESSAGE);
-        } else if (tabla == "productos" && obtenerProducto(nombre) != "") {
+        }else if(tabla == "usuarios" && tipo == "proveedor" && existeUsuario(tipo, nombre) != ""){
+            JOptionPane.showMessageDialog(null, "Ya existe un usuario con"
+                    + " este nombre", "Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        else if (tabla == "productos" && obtenerProducto(nombre) != "") {
             JOptionPane.showMessageDialog(null, "Ya existe un producto con"
                     + " este nombre", "Error!", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -149,7 +158,7 @@ public class ConsultasProductos {
 
     public void eliminarRegistro(int id, String tabla) throws SQLException {
         Connection miConexion = new ConexionBD().realizarConexion();
-        String consulta = "DELETE FROM "+tabla+" WHERE id = "+id;
+        String consulta = "DELETE FROM " + tabla + " WHERE id = " + id;
         Statement sentencia = miConexion.createStatement();
         sentencia.execute(consulta);
         miConexion.close();

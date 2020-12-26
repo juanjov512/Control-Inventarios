@@ -890,8 +890,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                           <Component id="btnInformes" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnActualizarRegistros" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnEliminarRegistros" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnEditarVentas" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnEditarCompras" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnVentas" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnCompras" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -915,9 +915,9 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnProductos" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnEliminarRegistros" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEditarCompras" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnActualizarRegistros" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEditarVentas" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnInformes" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -926,7 +926,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="btnEliminarRegistros">
+        <Container class="javax.swing.JPanel" name="btnEditarCompras">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="49" green="3a" red="31" type="rgb"/>
@@ -939,7 +939,7 @@
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
           </AccessibilityProperties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnEliminarRegistrosMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnEditarComprasMouseClicked"/>
           </Events>
 
           <Layout>
@@ -969,14 +969,14 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Eliminar registros"/>
+                <Property name="text" type="java.lang.String" value="Editar compras"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel20">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/controlinventarios/logos/round_delete_forever_white_18dp.png"/>
+                  <Image iconType="3" name="/controlinventarios/logos/baseline_edit_white_18dp.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -1192,7 +1192,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="btnActualizarRegistros">
+        <Container class="javax.swing.JPanel" name="btnEditarVentas">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="49" green="3a" red="31" type="rgb"/>
@@ -1202,7 +1202,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnActualizarRegistrosMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnEditarVentasMouseClicked"/>
           </Events>
 
           <Layout>
@@ -1232,14 +1232,14 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Actualizar registros"/>
+                <Property name="text" type="java.lang.String" value="Editar ventas"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel21">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/controlinventarios/logos/round_loop_white_18dp.png"/>
+                  <Image iconType="3" name="/controlinventarios/logos/baseline_edit_white_18dp.png"/>
                 </Property>
               </Properties>
             </Component>

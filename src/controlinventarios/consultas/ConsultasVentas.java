@@ -19,48 +19,102 @@ import javax.swing.table.DefaultTableModel;
  * @author juanj
  */
 public class ConsultasVentas {
-    
-    public void llenarTabla(JTable miTabla) throws SQLException{
-        DefaultTableModel modelo = new DefaultTableModel();
+
+    public void llenarTabla(JTable miTabla) throws SQLException {
+        DefaultTableModel modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         Connection miConexion = new ConexionBD().realizarConexion();
-        String consulta = "SELECT V.id, U.nombre as usuario, P.nombre, precio, "
-                + "kilos FROM ventas V INNER JOIN productos P "
+        String consulta = "SELECT V.id as id, U.nombre as usuario, P.nombre, "
+                + "precio, kilos, fecha FROM ventas V INNER JOIN productos P "
                 + "ON V.id_productos = P.id INNER JOIN usuarios U "
-                + "ON V.id_usuario = U.id";
+                + "ON V.id_usuario = U.id ORDER BY id DESC";
         Statement sentencia = miConexion.createStatement();
         ResultSet res = sentencia.executeQuery(consulta);
-        modelo.setColumnIdentifiers(new Object[]{"CODIGO","CLIENTE","PRODUCTO",
-        "PRECIO","KILOS"});
-        while(res.next()){
-            modelo.addRow(new Object[]{res.getString("id"),
-                res.getString("usuario"), res.getString("nombre"), 
-                res.getString("precio"), res.getString("kilos")});
+        modelo.setColumnIdentifiers(new Object[]{"ID", "CLIENTE", "PRODUCTO",
+            "PRECIO", "KILOS", "FECHA"});
+        while (res.next()) {
+            modelo.addRow(new Object[]{res.getString("id"), res.getString("usuario"),
+                res.getString("nombre"), res.getString("precio"),
+                res.getString("kilos"), res.getString("fecha")});
         }
         miTabla.setModel(modelo);
         miConexion.close();
     }
-    
-    public void agregarRegistros(ArrayList<Ventas> lista) throws SQLException{
-        ConsultasProductos productos = new ConsultasProductos();
+
+    public void busquedaTabla(JTable miTabla, String proveedor) throws SQLException {
+        DefaultTableModel modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         Connection miConexion = new ConexionBD().realizarConexion();
-        ConsultasProveedores proveedor = new ConsultasProveedores();
+        String consulta = "SELECT V.id as id, U.nombre as usuario, P.nombre, "
+                + "precio, kilos, fecha FROM ventas V INNER JOIN productos P "
+                + "ON V.id_productos = P.id INNER JOIN usuarios U "
+                + "ON V.id_usuario = U.id WHERE U.nombre LIKE '%" + proveedor + "%' "
+                + "ORDER BY id DESC";
         Statement sentencia = miConexion.createStatement();
-        
-        for(int i=0; i < lista.size(); i++){
-            String producto = productos.obtenerProducto(lista.get(i).getProducto());
-            String fecha = lista.get(i).getFecha();
-            String usuario = proveedor.obtenerUsuario(lista.get(i).getProveedor());
-            int precio = lista.get(i).getPrecio();
-            double kilos = lista.get(i).getKilos();
-            String consulta = "INSERT INTO ventas (id_productos, precio, kilos,"
-                + " fecha, id_usuario) values ('"+producto+"', '"+precio+"', "
-                + "'"+kilos+"', '"+fecha+"', '"+usuario+"')";
-            sentencia.execute(consulta);
+        ResultSet res = sentencia.executeQuery(consulta);
+        modelo.setColumnIdentifiers(new Object[]{"ID", "CLIENTE", "PRODUCTO",
+            "PRECIO", "KILOS", "FECHA"});
+        while (res.next()) {
+            modelo.addRow(new Object[]{res.getString("id"), res.getString("usuario"),
+                res.getString("nombre"), res.getString("precio"),
+                res.getString("kilos"), res.getString("fecha")});
         }
-        
+        miTabla.setModel(modelo);
         miConexion.close();
     }
-    
-    
-    
+
+    public void agregarRegistros(ArrayList<Ventas> lista) throws SQLException {
+        ConsultasProductos productos = new ConsultasProductos();
+        Connection miConexion = new ConexionBD().realizarConexion();
+        ConsultasClientes cliente = new ConsultasClientes();
+        Statement sentencia = miConexion.createStatement();
+
+        for (int i = 0; i < lista.size(); i++) {
+            String producto = productos.obtenerProducto(lista.get(i).getProducto());
+            String fecha = lista.get(i).getFecha();
+            String usuario = cliente.obtenerUsuario(lista.get(i).getProveedor());
+            int precio = lista.get(i).getPrecio();
+            double kilos = lista.get(i).getKilos();
+            int total = (int) (precio*kilos);
+            String consulta = "INSERT INTO ventas (id_productos, precio, kilos,"
+                    + " fecha, id_usuario, total) values ('" + producto + "', '" + precio + "', "
+                    + "'" + kilos + "', '" + fecha + "', '" + usuario + "', '" + total + "')";
+            sentencia.execute(consulta);
+        }
+
+        miConexion.close();
+    }
+
+    public void editarRegistro(Ventas v, int id) throws SQLException {
+        ConsultasProductos productos = new ConsultasProductos();
+        Connection miConexion = new ConexionBD().realizarConexion();
+        ConsultasClientes cliente = new ConsultasClientes();
+        Statement sentencia = miConexion.createStatement();
+        String producto = productos.obtenerProducto(v.getProducto());
+        String fecha = v.getFecha();
+        String usuario = cliente.obtenerUsuario(v.getProveedor());
+        int precio = v.getPrecio();
+        double kilos = v.getKilos();
+        int total = (int) (precio * kilos);
+        String consulta = "UPDATE ventas SET id_productos = " + producto + ", "
+                + "precio = " + precio + ", kilos = " + kilos + ", fecha = '" + fecha + "', "
+                + "id_usuario =" + usuario + ", total = " + total + " WHERE id = " + id + "";
+        sentencia.execute(consulta);
+        miConexion.close();
+    }
+
+    public void eliminarRegistro(int id) throws SQLException {
+        Connection miConexion = new ConexionBD().realizarConexion();
+        Statement sentencia = miConexion.createStatement();
+        String consulta = "DELETE FROM ventas where id = " + id + "";
+        sentencia.execute(consulta);
+        miConexion.close();
+    }
+
 }

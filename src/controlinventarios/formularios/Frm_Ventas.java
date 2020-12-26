@@ -2,19 +2,19 @@ package controlinventarios.formularios;
 
 import controlinventarios.consultas.ConsultasClientes;
 import controlinventarios.consultas.ConsultasProductos;
-import controlinventarios.consultas.ConsultasCompras;
-import controlinventarios.consultas.ConsultasProveedores;
 import controlinventarios.consultas.ConsultasVentas;
 import controlinventarios.modals.ModalProveedor;
-import controlinventarios.objects.Compras;
 import controlinventarios.objects.Ventas;
 import controlinventarios.operacionesJTable.OperacionesJTable;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
+
 
 /**
  *
@@ -33,6 +33,7 @@ public class Frm_Ventas extends javax.swing.JFrame {
         llenarProductos();
         llenarTablaVentas();
         txtFecha.setDate(new Date());
+        AutoCompleteDecorator.decorate(cmbCliente);
     }
 
     /**
@@ -73,7 +74,7 @@ public class Frm_Ventas extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        btnEliminarRegistros = new javax.swing.JPanel();
+        btnEditarCompras = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         btnCompras = new javax.swing.JPanel();
@@ -88,7 +89,7 @@ public class Frm_Ventas extends javax.swing.JFrame {
         btnProductos = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        btnActualizarRegistros = new javax.swing.JPanel();
+        btnEditarVentas = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         btnInformes = new javax.swing.JPanel();
@@ -383,33 +384,33 @@ public class Frm_Ventas extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(49, 58, 73));
 
-        btnEliminarRegistros.setBackground(new java.awt.Color(49, 58, 73));
-        btnEliminarRegistros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEliminarRegistros.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEditarCompras.setBackground(new java.awt.Color(49, 58, 73));
+        btnEditarCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditarCompras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnEliminarRegistrosMouseClicked(evt);
+                btnEditarComprasMouseClicked(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Eliminar registros");
+        jLabel1.setText("Editar compras");
 
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controlinventarios/logos/round_delete_forever_white_18dp.png"))); // NOI18N
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controlinventarios/logos/baseline_edit_white_18dp.png"))); // NOI18N
 
-        javax.swing.GroupLayout btnEliminarRegistrosLayout = new javax.swing.GroupLayout(btnEliminarRegistros);
-        btnEliminarRegistros.setLayout(btnEliminarRegistrosLayout);
-        btnEliminarRegistrosLayout.setHorizontalGroup(
-            btnEliminarRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEliminarRegistrosLayout.createSequentialGroup()
+        javax.swing.GroupLayout btnEditarComprasLayout = new javax.swing.GroupLayout(btnEditarCompras);
+        btnEditarCompras.setLayout(btnEditarComprasLayout);
+        btnEditarComprasLayout.setHorizontalGroup(
+            btnEditarComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEditarComprasLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        btnEliminarRegistrosLayout.setVerticalGroup(
-            btnEliminarRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        btnEditarComprasLayout.setVerticalGroup(
+            btnEditarComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
             .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -563,33 +564,33 @@ public class Frm_Ventas extends javax.swing.JFrame {
             .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        btnActualizarRegistros.setBackground(new java.awt.Color(49, 58, 73));
-        btnActualizarRegistros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnActualizarRegistros.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEditarVentas.setBackground(new java.awt.Color(49, 58, 73));
+        btnEditarVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditarVentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnActualizarRegistrosMouseClicked(evt);
+                btnEditarVentasMouseClicked(evt);
             }
         });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Actualizar registros");
+        jLabel7.setText("Editar ventas");
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controlinventarios/logos/round_loop_white_18dp.png"))); // NOI18N
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controlinventarios/logos/baseline_edit_white_18dp.png"))); // NOI18N
 
-        javax.swing.GroupLayout btnActualizarRegistrosLayout = new javax.swing.GroupLayout(btnActualizarRegistros);
-        btnActualizarRegistros.setLayout(btnActualizarRegistrosLayout);
-        btnActualizarRegistrosLayout.setHorizontalGroup(
-            btnActualizarRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnActualizarRegistrosLayout.createSequentialGroup()
+        javax.swing.GroupLayout btnEditarVentasLayout = new javax.swing.GroupLayout(btnEditarVentas);
+        btnEditarVentas.setLayout(btnEditarVentasLayout);
+        btnEditarVentasLayout.setHorizontalGroup(
+            btnEditarVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEditarVentasLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        btnActualizarRegistrosLayout.setVerticalGroup(
-            btnActualizarRegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        btnEditarVentasLayout.setVerticalGroup(
+            btnEditarVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
             .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -644,8 +645,8 @@ public class Frm_Ventas extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(btnInformes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnActualizarRegistros, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminarRegistros, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditarVentas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditarCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnVentas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(btnProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -665,15 +666,15 @@ public class Frm_Ventas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEliminarRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditarCompras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnActualizarRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditarVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnInformes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnEliminarRegistros.getAccessibleContext().setAccessibleName("");
+        btnEditarCompras.getAccessibleContext().setAccessibleName("");
 
         jPanel12.setBackground(new java.awt.Color(23, 100, 191));
 
@@ -739,7 +740,10 @@ public class Frm_Ventas extends javax.swing.JFrame {
             try {
                 guardarVenta();
                 limpiarTabla();
-            } catch (SQLException ex) {}
+                JOptionPane.showMessageDialog(null, "Operación terminada!");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex,"Error!",JOptionPane.ERROR_MESSAGE);
+            }
         }
 
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -750,6 +754,9 @@ public class Frm_Ventas extends javax.swing.JFrame {
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Tipo de entrada no valido en "
                     + "el campo kilos o precio", "Error!", JOptionPane.ERROR_MESSAGE);
+        }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Faltan campos por rellenar"
+                    + "\n(posiblemente en la fecha)", "Error!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAgregarTablaActionPerformed
 
@@ -771,12 +778,21 @@ public class Frm_Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnInformesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInformesMouseClicked
-        // TODO add your handling code here:
+        try {
+            new Frm_Informes().setVisible(true);
+        } catch (SQLException ex) {
+        }
+        this.setVisible(false);
     }//GEN-LAST:event_btnInformesMouseClicked
 
-    private void btnActualizarRegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarRegistrosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnActualizarRegistrosMouseClicked
+    private void btnEditarVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarVentasMouseClicked
+        try {
+            new Frm_EditarVentas().setVisible(true);
+        } catch (SQLException ex) {
+        } catch (ParseException ex) {
+        }
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEditarVentasMouseClicked
 
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
         try {
@@ -798,9 +814,15 @@ public class Frm_Ventas extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnComprasMouseClicked
 
-    private void btnEliminarRegistrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarRegistrosMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarRegistrosMouseClicked
+    private void btnEditarComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarComprasMouseClicked
+        try {
+            new Frm_EditarCompras().setVisible(true);
+        } catch (SQLException ex) {
+        } catch (ParseException ex) {
+            Logger.getLogger(Frm_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEditarComprasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -887,13 +909,13 @@ public class Frm_Ventas extends javax.swing.JFrame {
     private void llenarProductos() {
         ConsultasProductos con = new ConsultasProductos();
         try {
-            con.llenarCMBProductos(cmbProducto);
+            con.llenarCMBProductos(cmbProducto,"");
         } catch (Exception e) {
         }
     }
     
-    private double calcularTotal(){
-        Double total = 0.0;
+    private long calcularTotal(){
+        long total = 0;
         for(Ventas v:listaVentas){
             total+=v.getKilos() * v.getPrecio();
         }
@@ -902,13 +924,13 @@ public class Frm_Ventas extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnActualizarRegistros;
     private javax.swing.JButton btnAgregarProveedor;
     private javax.swing.JButton btnAgregarTabla;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JPanel btnCompras;
+    private javax.swing.JPanel btnEditarCompras;
+    private javax.swing.JPanel btnEditarVentas;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JPanel btnEliminarRegistros;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JPanel btnInformes;
     private javax.swing.JPanel btnProductos;

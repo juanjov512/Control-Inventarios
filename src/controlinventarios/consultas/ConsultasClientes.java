@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 public class ConsultasClientes {
 
     public void llenarCMBClientes(JComboBox cmb) throws SQLException {
+        cmb.removeAllItems();
         Connection conexion = new ConexionBD().realizarConexion();
         String consulta = "SELECT nombre FROM usuarios WHERE tipo = 'cliente'";
         Statement sentencia = conexion.createStatement();
