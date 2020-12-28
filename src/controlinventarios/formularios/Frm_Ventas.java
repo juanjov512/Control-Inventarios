@@ -3,7 +3,7 @@ package controlinventarios.formularios;
 import controlinventarios.consultas.ConsultasClientes;
 import controlinventarios.consultas.ConsultasProductos;
 import controlinventarios.consultas.ConsultasVentas;
-import controlinventarios.modals.ModalProveedor;
+import controlinventarios.modals.ModalCliente;
 import controlinventarios.objects.Ventas;
 import controlinventarios.operacionesJTable.OperacionesJTable;
 import java.sql.SQLException;
@@ -71,6 +71,7 @@ public class Frm_Ventas extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        btnRefrescar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnEditarCompras = new javax.swing.JPanel();
@@ -249,14 +250,27 @@ public class Frm_Ventas extends javax.swing.JFrame {
             }
         });
 
+        btnRefrescar.setBackground(new java.awt.Color(244, 244, 244));
+        btnRefrescar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/controlinventarios/logos/baseline_loop_black_18dp.png"))); // NOI18N
+        btnRefrescar.setBorder(null);
+        btnRefrescar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefrescarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1138, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
             .addGroup(jPanel8Layout.createSequentialGroup()
@@ -313,7 +327,9 @@ public class Frm_Ventas extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(btnRefrescar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
@@ -729,7 +745,7 @@ public class Frm_Ventas extends javax.swing.JFrame {
 
     private void btnAgregarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProveedorActionPerformed
         //this.setVisible(rootPaneCheckingEnabled);
-        new ModalProveedor().setVisible(true);
+        new ModalCliente().setVisible(true);
     }//GEN-LAST:event_btnAgregarProveedorActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -822,6 +838,13 @@ public class Frm_Ventas extends javax.swing.JFrame {
         }
         this.setVisible(false);
     }//GEN-LAST:event_btnEditarComprasMouseClicked
+
+    private void btnRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefrescarActionPerformed
+        try {
+            llenarClientes();
+        } catch (SQLException ex) {
+        }
+    }//GEN-LAST:event_btnRefrescarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -933,6 +956,7 @@ public class Frm_Ventas extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JPanel btnInformes;
     private javax.swing.JPanel btnProductos;
+    private javax.swing.JButton btnRefrescar;
     private javax.swing.JPanel btnVentas;
     private javax.swing.JComboBox<String> cmbCliente;
     private javax.swing.JComboBox<String> cmbProducto;
