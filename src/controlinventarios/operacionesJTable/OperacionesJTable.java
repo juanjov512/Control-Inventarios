@@ -7,6 +7,7 @@ package controlinventarios.operacionesJTable;
 
 import controlinventarios.objects.Compras;
 import controlinventarios.objects.Ventas;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
  * @author juanj
  */
 public class OperacionesJTable {
+    
+    DecimalFormat formateo = new DecimalFormat("###,###.##");
     
     public void llenarTablaCompras(JTable miTabla, ArrayList<Compras> listaCompra){
         DefaultTableModel modelo = new DefaultTableModel(){
@@ -29,8 +32,8 @@ public class OperacionesJTable {
             Object[] datos = new Object[5];
             datos[0] = listaCompra.get(i).getProveedor();
             datos[1] = listaCompra.get(i).getProducto();
-            datos[2] = listaCompra.get(i).getPrecio();
-            datos[3] = listaCompra.get(i).getKilos();
+            datos[2] = formateo.format(listaCompra.get(i).getPrecio());
+            datos[3] = formateo.format(listaCompra.get(i).getKilos());
             modelo.addRow(datos);
         }
         
@@ -49,8 +52,8 @@ public class OperacionesJTable {
             Object[] datos = new Object[5];
             datos[0] = listaVenta.get(i).getProveedor();
             datos[1] = listaVenta.get(i).getProducto();
-            datos[2] = listaVenta.get(i).getPrecio();
-            datos[3] = listaVenta.get(i).getKilos();
+            datos[2] = formateo.format(listaVenta.get(i).getPrecio());
+            datos[3] = formateo.format(listaVenta.get(i).getKilos());
             modelo.addRow(datos);
         }
         

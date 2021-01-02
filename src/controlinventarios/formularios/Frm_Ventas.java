@@ -8,6 +8,7 @@ import controlinventarios.objects.Ventas;
 import controlinventarios.operacionesJTable.OperacionesJTable;
 import java.awt.Toolkit;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +25,7 @@ import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 public class Frm_Ventas extends javax.swing.JFrame {
 
     ArrayList<Ventas> listaVentas = new ArrayList<>();
+    DecimalFormat formateo = new DecimalFormat("###,###.##");
 
     /**
      * Creates new form Frm_Principal
@@ -349,7 +351,7 @@ public class Frm_Ventas extends javax.swing.JFrame {
                             .addComponent(cmbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAgregarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, 0)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, 0)
@@ -736,8 +738,8 @@ public class Frm_Ventas extends javax.swing.JFrame {
                 .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jPanel5.getAccessibleContext().setAccessibleParent(jPanel5);
@@ -782,7 +784,7 @@ public class Frm_Ventas extends javax.swing.JFrame {
         if (index != -1) {
             listaVentas.remove(index);
             llenarTablaVentas();
-            txtTotal.setText(calcularTotal()+"");
+            txtTotal.setText(formateo.format(calcularTotal()));
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -917,7 +919,7 @@ public class Frm_Ventas extends javax.swing.JFrame {
         operaciones.agregarVenta(listaVentas, fecha, proveedor, productos,
                 precio, kilos);
         operaciones.llenarTablaVentas(tableVentas, listaVentas);
-        txtTotal.setText(calcularTotal()+"");
+        txtTotal.setText(formateo.format(calcularTotal()));
     }
 
     private void llenarTablaVentas() {

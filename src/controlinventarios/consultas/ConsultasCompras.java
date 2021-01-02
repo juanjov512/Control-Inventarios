@@ -6,14 +6,15 @@
 package controlinventarios.consultas;
 
 import controlinventarios.objects.Compras;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +24,8 @@ import javax.swing.table.DefaultTableModel;
  * @author juanj
  */
 public class ConsultasCompras {
+    
+    DecimalFormat formateo = new DecimalFormat("###,###.##");
 
     public void llenarTabla(JTable miTabla) throws SQLException {
         DefaultTableModel modelo = new DefaultTableModel() {
@@ -41,8 +44,8 @@ public class ConsultasCompras {
             "PRECIO", "KILOS", "FECHA"});
         while (res.next()) {
             modelo.addRow(new Object[]{res.getString("id"), res.getString("usuario"),
-                res.getString("nombre"), res.getString("precio"),
-                res.getString("kilos"), res.getString("fecha")});
+                res.getString("nombre"), formateo.format(res.getLong("precio")),
+                formateo.format(res.getDouble("kilos")), res.getString("fecha")});
         }
         miTabla.setModel(modelo);
         miConexion.close();
@@ -85,7 +88,8 @@ public class ConsultasCompras {
             String usuario = proveedor.obtenerUsuario(lista.get(i).getProveedor());
             int precio = lista.get(i).getPrecio();
             double kilos = lista.get(i).getKilos();
-            int total = (int) (lista.get(i).getProducto().equalsIgnoreCase("gastos") ? precio : precio * kilos);
+            BigInteger total;
+            total = BigDecimal.valueOf(lista.get(i).getProducto().equalsIgnoreCase("gastos") ? precio : precio * kilos).toBigInteger();
             String consulta = "INSERT INTO compras (id_productos, precio, kilos,"
                     + " fecha, id_usuario, total) values ('" + producto + "', '" + precio + "', "
                     + "'" + kilos + "', '" + fecha + "', '" + usuario + "', '" + total + "')";
@@ -105,7 +109,7 @@ public class ConsultasCompras {
         String usuario = proveedor.obtenerUsuario(c.getProveedor());
         int precio = c.getPrecio();
         double kilos = c.getKilos();
-        int total = (int) (c.getProducto().equalsIgnoreCase("gastos") ? precio : precio * kilos);
+        BigInteger total = BigDecimal.valueOf(c.getProducto().equalsIgnoreCase("gastos") ? precio : precio * kilos).toBigInteger();
         String consulta = "UPDATE compras SET id_productos = " + producto + ", "
                 + "precio = " + precio + ", kilos = " + kilos + ", fecha = '" + fecha + "', "
                 + "id_usuario =" + usuario + ", total = " + total + " WHERE id = " + id + "";
@@ -144,17 +148,17 @@ public class ConsultasCompras {
         Statement sentencia = miConexion.createStatement();
         ResultSet res = sentencia.executeQuery(consulta);
         while (res.next()) {
-            modelo.addRow(new Object[]{res.getString("nombre"), res.getString("Kilos"),
-                res.getString("Total")});
+            modelo.addRow(new Object[]{res.getString("nombre"), formateo.format(res.getDouble("Kilos")),
+                formateo.format(res.getLong("Total"))});
             if (res.getString("nombre").equalsIgnoreCase("gastos")) {
-                gastos += res.getInt("Total");
+                gastos += res.getLong("Total");
             } else {
-                total += res.getInt("Total");
+                total += res.getLong("Total");
             }
         }
-        lblCompras.setText(total + "");
-        lblGastos.setText(gastos + "");
-        lblTotal.setText((total + gastos) + "");
+        lblCompras.setText(formateo.format(total));
+        lblGastos.setText(formateo.format(gastos));
+        lblTotal.setText(formateo.format((total + gastos)));
         miConexion.close();
     }
 
@@ -174,10 +178,10 @@ public class ConsultasCompras {
         long gastos = (long) valores.get(1);
         long ventas = (long) valores.get(2);
         long total = ventas-gastos-compras;
-        lblCompras.setText(compras+"");
-        lblGastos.setText(gastos+"");
-        lblVenta.setText(ventas+"");
-        lblTotal.setText(total+"");
+        lblCompras.setText(formateo.format(compras));
+        lblGastos.setText(formateo.format(gastos));
+        lblVenta.setText(formateo.format(ventas));
+        lblTotal.setText(formateo.format(total));
     }
 
     private void reporteDeTodoCompras(DefaultTableModel modelo, Date fechaMin, 
@@ -190,12 +194,12 @@ public class ConsultasCompras {
         Statement sentencia = miConexion.createStatement();
         ResultSet res = sentencia.executeQuery(consulta);
         while (res.next()) {
-            modelo.addRow(new Object[]{tabla, res.getString("nombre"), res.getString("Kilos"),
-                res.getString("Total")});
+            modelo.addRow(new Object[]{tabla, res.getString("nombre"), formateo.format(res.getDouble("Kilos")),
+                formateo.format(res.getLong("Total"))});
             if (res.getString("nombre").equalsIgnoreCase("gastos")) {
-                gastos += res.getInt("Total");
+                gastos += res.getLong("Total");
             } else {
-                total += res.getInt("Total");
+                total += res.getLong("Total");
             }
         }
         obj.add(total);

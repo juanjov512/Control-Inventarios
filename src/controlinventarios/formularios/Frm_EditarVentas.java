@@ -1003,8 +1003,8 @@ public class Frm_EditarVentas extends javax.swing.JFrame {
             ID_PRODUCTO = Integer.parseInt(String.valueOf(tm.getValueAt(row, 0)));
             item(cmbProveedores, String.valueOf(tm.getValueAt(row, 1)));
             item(cmbProductos, String.valueOf(tm.getValueAt(row, 2)));
-            txtPrecio.setText(String.valueOf(tm.getValueAt(row, 3)));
-            txtKilos.setText(String.valueOf(tm.getValueAt(row, 4)));
+            txtPrecio.setText(String.valueOf(tm.getValueAt(row, 3)).replace(".", ""));
+            txtKilos.setText(String.valueOf(tm.getValueAt(row, 4)).replace(".", "").replace(",", "."));
             Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(tm.getValueAt(row, 5)));
             txtFecha.setDate(date1);
         }

@@ -7,6 +7,7 @@ import controlinventarios.modals.ModalProveedor;
 import controlinventarios.objects.Compras;
 import controlinventarios.operacionesJTable.OperacionesJTable;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +22,7 @@ import javax.swing.JOptionPane;
 public class Frm_Compras extends javax.swing.JFrame {
 
     ArrayList<Compras> listaCompras = new ArrayList<>();
+    DecimalFormat formatea = new DecimalFormat("###,###.##");
 
     /**
      * Creates new form Frm_Principal
@@ -702,7 +704,7 @@ public class Frm_Compras extends javax.swing.JFrame {
                 .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -748,7 +750,7 @@ public class Frm_Compras extends javax.swing.JFrame {
         if (index != -1) {
             listaCompras.remove(index);
             llenarTablaCompras();
-            txtTotal.setText(calcularTotal()+"");
+            txtTotal.setText(formatea.format(calcularTotal())+"");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -871,7 +873,7 @@ public class Frm_Compras extends javax.swing.JFrame {
 
     private void agregarCompra() {
         OperacionesJTable operaciones = new OperacionesJTable();
-        int precio = Integer.parseInt(txtPrecio.getText().toString());
+        int precio = Integer.valueOf(txtPrecio.getText().toString());
         String fecha = txtFecha.getDate().toString();
         String productos = cmbProducto.getSelectedItem().toString();
         String proveedor = cmbProveedor.getSelectedItem().toString();
@@ -879,7 +881,7 @@ public class Frm_Compras extends javax.swing.JFrame {
         operaciones.agregarCompra(listaCompras, fecha, proveedor, productos,
                 precio, kilos);
         operaciones.llenarTablaCompras(tableCompras, listaCompras);
-        txtTotal.setText(calcularTotal()+"");
+        txtTotal.setText(formatea.format(calcularTotal())+"");
     }
 
     private void llenarTablaCompras() {
